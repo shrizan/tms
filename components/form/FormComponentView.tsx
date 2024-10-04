@@ -2,15 +2,22 @@ import { Input } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import InputNumber from "antd/lib/input-number";
 import { FormComponentInfo } from "./form.types";
+import { Rule } from "antd/es/form";
 
-const FormComponent: React.FC<FormComponentInfo> = ({ label, type, extraText, placeHolder, rules }) => {
+const FormComponentView: React.FC<FormComponentInfo> = ({ label, type, extraText, placeHolder, rules, name }) => {
+
+    const formItemProps = {
+        label: label,
+        rules: rules as Rule[],
+        extra: extraText,
+        hasFeedback: true,
+        name: name
+    }
+
     if (type === "EMAIL") {
         return (
             <FormItem
-                label={label}
-                rules={rules}
-                extra={extraText}
-                hasFeedback
+                {...formItemProps}
             >
                 <Input placeholder={placeHolder} />
             </FormItem>
@@ -19,10 +26,7 @@ const FormComponent: React.FC<FormComponentInfo> = ({ label, type, extraText, pl
 
     else if (type === "NUMBER") {
         <FormItem
-            label={label}
-            rules={rules}
-            extra={extraText}
-            hasFeedback
+            {...formItemProps}
         >
             <InputNumber placeholder={placeHolder} style={{ width: "100%" }} />
         </FormItem>
@@ -31,10 +35,7 @@ const FormComponent: React.FC<FormComponentInfo> = ({ label, type, extraText, pl
     else {
         return (
             <FormItem
-                label={label}
-                rules={rules}
-                extra={extraText}
-                hasFeedback
+                {...formItemProps}
             >
                 <Input placeholder={placeHolder} />
             </FormItem>
@@ -42,4 +43,4 @@ const FormComponent: React.FC<FormComponentInfo> = ({ label, type, extraText, pl
     }
 }
 
-export default FormComponent;
+export default FormComponentView;
