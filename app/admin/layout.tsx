@@ -3,9 +3,7 @@ import React from 'react';
 import {
     BankOutlined,
     CarOutlined,
-    FileOutlined,
     PieChartOutlined,
-    TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
