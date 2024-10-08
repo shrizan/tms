@@ -37,7 +37,7 @@ const items: MenuItem[] = [
         getItem('Bill', '4'),
         getItem('Alex', '5'),
     ]),
-    getItem('Vehicle', '2', <CarOutlined />),
+    getItem('Vehicle', 'vehicle', <CarOutlined />),
 ];
 
 const App: React.FC = ({ children }: React.PropsWithChildren) => {
