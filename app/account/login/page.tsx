@@ -1,6 +1,6 @@
-import { Button, Card, Checkbox, Col, Input, Row, Space } from "antd";
-import Password from "antd/es/input/Password";
+import { Card, Col, Row, Space } from "antd";
 import Link from "next/link";
+import LoginForm from "./components/LoginForm";
 
 export default function Login() {
     return (
@@ -9,10 +9,11 @@ export default function Login() {
                 <Card title={<h3 style={{ textAlign: "center" }}>COMPANY LOGO</h3>} style={{ paddingTop: 20, paddingBottom: 20 }}>
                     <Space direction="vertical" size="large" style={{ display: "flex" }}>
                         <p style={{ textAlign: "center", fontWeight: 600, textTransform: "uppercase" }}>User Login</p>
-                        <Input placeholder="username" />
-                        <Password placeholder="Password" />
-                        <Checkbox>Remember me</Checkbox>
-                        <Button type="primary">Login</Button>
+
+                        {/* LOGIN FORM SECTION */}
+                        <LoginForm />
+
+                        {/* FOOTER SECTION */}
                         <Row justify={"space-between"} align={"bottom"}>
                             <Link href={"/forgot-password"}>Forgot Password</Link>
                             <Link href={"/forgot-password"}>Sign Up</Link>
