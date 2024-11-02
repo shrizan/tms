@@ -1,11 +1,15 @@
-import { Col, Input, Row } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import { Button, Col, Input, Row } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import Password from "antd/es/input/Password";
 import TextArea from "antd/es/input/TextArea";
 
 export default function IIFTAWDTInfoView({ fieldName, restField }: { fieldName: number, restField: unknown }) {
   return (
-    <>
+    <div style={{ border: "1px solid #dbdbdb", padding: 10, marginTop: 20, borderRadius: 10, marginBottom: 20 }}>
+      <Row justify={"end"}>
+        <Button icon={<DeleteOutlined />} shape="circle" danger onClick={() => { }} />
+      </Row>
       <Row gutter={15}>
 
 
@@ -87,6 +91,6 @@ export default function IIFTAWDTInfoView({ fieldName, restField }: { fieldName: 
         <TextArea rows={3} placeholder="Comments"></TextArea>
       </FormItem>
 
-    </>
+    </div>
   );
 }

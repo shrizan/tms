@@ -92,13 +92,8 @@ export default function IFTAWDTView() {
               {
                 fields.map(({ key, name, ...restField }, index) => (
                   <Row key={key} align={"top"}>
-                    <Col span={23}>
+                    <Col span={24}>
                       <IIFTAWDTInfoView key={key} fieldName={name} restField={restField} /></Col>
-                    <Col span={1}>
-                      {
-                        (index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />
-                      }
-                    </Col>
                   </Row>
                 ))
               }
@@ -111,6 +106,13 @@ export default function IFTAWDTView() {
           )
         }
       </FormList>
+
+
+      <FormItem>
+        <Button htmlType="submit" type="primary" style={{ marginTop: 10 }}>
+          Login
+        </Button>
+      </FormItem>
 
     </Form>
   );

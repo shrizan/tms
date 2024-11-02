@@ -5,12 +5,14 @@ import {
   US_AUTHORITIES_TAB,
   LICENSE_TAB,
   IFTA_WDT_TAB,
+  BORDER_TOLL_TAB,
 } from "../constant/CompanyConstant";
 import Profile from "./tabs/Profile";
 import Contact from "./tabs/Contact";
 import License from "./tabs/License";
 import USAuthorities from "./tabs/USAuthorities";
 import IFTAWDTView from "./tabs/IFTAWDT";
+import BorderToll from "./tabs/BorderToll";
 
 export interface IMapCompany {
   tab: string;
@@ -29,6 +31,8 @@ const MapCompany: React.FC<IMapCompany> = ({ tab }) => {
       return <License />;
     case IFTA_WDT_TAB:
       return <IFTAWDTView />;
+    case BORDER_TOLL_TAB:
+      return <BorderToll />;
 
     default:
       return <>NA</>;
