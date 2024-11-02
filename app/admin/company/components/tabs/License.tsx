@@ -15,7 +15,6 @@ import {
 import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import FormList from "antd/es/form/FormList";
-import TextArea from "antd/es/input/TextArea";
 import LicenseCertificationCredentials from "./LicenseCertificationCredentials";
 
 export interface ILicenseCertificationCredentials{
@@ -205,78 +204,6 @@ const License = () => {
           </Col>
 
         </Row>
-
-        {/* <Row gutter={15}>
-        <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
-            <FormItem
-              label="License Certifications Type"
-              name={"type"}
-              rules={[
-                {
-                  required: true,
-                  message: "License Certification Type is required!!!",
-                },
-              ]}
-            >
-              <Select allowClear options={LicenseCertifications}></Select>
-            </FormItem>
-          </Col>
-
-          <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
-            <FormItem
-              label="Username"
-              name={"username"}
-              rules={[
-                {
-                  required: true,
-                  message: "Username is required!!!",
-                },
-              ]}
-            >
-              <Input placeholder="Username" />
-            </FormItem>
-          </Col>
-
-          <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
-            <FormItem
-              label="Password"
-              name={"password"}
-              rules={[
-                {
-                  required: true,
-                  message: "Password is required!!!",
-                },
-              ]}
-            >
-              <Input placeholder="Password" />
-            </FormItem>
-          </Col>
-
-          <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
-            <FormItem
-              label="Expiry Date"
-              name={"certificationExpiryDate"}
-              rules={[
-                {
-                  required: true,
-                  message: "Expiry Date is required!!!",
-                },
-              ]}
-            >
-             <DatePicker placeholder="Expiry Date" style={{width:"100%"}}/>
-            </FormItem>
-          </Col>
-
-          <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
-            <FormItem
-              label="Comments"
-              name={"comments"}
-            >
-              <TextArea placeholder="Comments" />
-            </FormItem>
-          </Col>
-
-        </Row> */}
 
         <FormList name={"licenseCertificationsCredentials"}
           rules={[
