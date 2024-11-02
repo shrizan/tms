@@ -32,7 +32,7 @@ export interface IContact {
 
 export default function Contact() {
 
-  const [form] = useForm();
+  const [form] = useForm<IContact>();
 
   return (
     <FormLayout>
@@ -41,6 +41,10 @@ export default function Contact() {
         form={form}
         onFinish={(values) => console.log(values)}
         onFinishFailed={(errorinfo) => console.log("abc", errorinfo)}
+        initialValues={{
+          contactInfo: [{}],
+          physicalAddrss: [{}],
+        }}
       >
         <Divider orientation="left">Contact Info</Divider>
         <FormList name={"contactInfo"}
@@ -65,12 +69,14 @@ export default function Contact() {
                   errors && <div style={{ color: "red" }}>{errors.toString()}</div>
                 }
                 {
-                  fields.map(({ key, name, ...restField }) => (
+                  fields.map(({ key, name, ...restField }, index) => (
                     <Row key={key} align={"top"}>
                       <Col span={23}>
                         <ContactInformation key={key} fieldName={name} restField={restField} /></Col>
                       <Col span={1}>
-                        <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />
+                        {
+                          (index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />
+                        }
                       </Col>
                     </Row>
                   ))
