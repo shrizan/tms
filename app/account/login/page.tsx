@@ -1,6 +1,13 @@
 import { Card, Col, Row, Space } from "antd";
 import Link from "next/link";
 import LoginForm from "./components/LoginForm";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+    title: "User login"
+}
+
 
 export default function Login() {
     return (
