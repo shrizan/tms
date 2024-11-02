@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { SaveOutlined } from "@ant-design/icons";
+import { SaveOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   Col,
   DatePicker,
@@ -14,7 +14,17 @@ import {
 } from "antd";
 import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
+import FormList from "antd/es/form/FormList";
 import TextArea from "antd/es/input/TextArea";
+import LicenseCertificationCredentials from "./LicenseCertificationCredentials";
+
+export interface ILicenseCertificationCredentials{
+    type: string;
+    username: string;
+    password: string;
+    certificationExpiryDate: string;
+    comments: string;
+};
 
 export interface ILicense {
   fleetNumber: string;
@@ -27,11 +37,7 @@ export interface ILicense {
   USABondExpiryDate: string;
   isCTPATCertified: string;
   annualReviewDate: string;
-  type: string;
-  username: string;
-  password: string;
-  certificationExpiryDate: string;
-  comments: string;
+  licenseCertificationsCredentials: ILicenseCertificationCredentials[];
 }
 
 const BOOLEAN_TYPES = [
@@ -39,21 +45,13 @@ const BOOLEAN_TYPES = [
   {value: false, label: "NO" },
 ];
 
-const LicenseCertifications = [
-    {value:"Login.gov",  label: "Login.gov" },
-    { value:"PIP Certified", label: "PIP Certified" },
-    { value:"Smartway Certified", label: "Smartway Certified" },
-    { value: "Alcohol Permit" , label: "Alcohol Permit" },
-    { value: "PHMSA", label: "PHMSA" },
-    { value: "Hazmat Alliance", label: "Hazmat Alliance" },
-    { value: "MOE CC", label: "MOE CC" },
-];
+
 
 const License = () => {
   const [form] = useForm<ILicense>();
   return (
     <>
-      <Form form={form} layout="vertical" onFinish={() => {}}>
+      <Form form={form} layout="vertical" onFinish={() => {}} initialValues={ {licenseCertificationsCredentials: [{}]}}>
         <Divider orientation="left">IRP Info</Divider>
         <Row gutter={15}>
           <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
@@ -116,6 +114,8 @@ const License = () => {
             </FormItem>
           </Col>
         </Row>
+
+        
 
         <Row gutter={15}>
           <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }}>
@@ -206,7 +206,7 @@ const License = () => {
 
         </Row>
 
-        <Row gutter={15}>
+        {/* <Row gutter={15}>
         <Col xs={{ span: 24 }} md={{ span: 24 }} lg={{ span: 24 }}>
             <FormItem
               label="License Certifications Type"
@@ -276,9 +276,47 @@ const License = () => {
             </FormItem>
           </Col>
 
-        </Row>
+        </Row> */}
 
-        <FormItem>
+        <FormList name={"licenseCertificationsCredentials"}
+          rules={[
+            {
+              validator: (_, licenseCertificationsCredentials) => {
+                if (!licenseCertificationsCredentials || licenseCertificationsCredentials.length < 1) {
+                  return Promise.reject(new Error('At least one yard address is required.'));
+                }
+                else {
+                  return Promise.resolve();
+                }
+              }
+            }
+          ]}
+        >
+          {
+            (fields, { add, remove }) => (
+              <>
+                {
+                  fields.map(({ key, name, ...restField }, index) => (
+                    <Row key={key} align={"top"}>
+                      <Col span={23}>
+                        <LicenseCertificationCredentials key={key} name={name} restField={restField} /></Col>
+                      <Col span={1}>
+                        {(index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />}
+                      </Col>
+                    </Row>
+                  ))
+                }
+                <Row>
+                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                    Add License Certifications Credentials
+                  </Button>
+                </Row>
+              </>
+            )
+          }
+        </FormList>
+
+        <FormItem style={{ marginTop: 10 }}>
           <Button htmlType="submit" type="primary" icon={<SaveOutlined />}>
             Save
           </Button>
