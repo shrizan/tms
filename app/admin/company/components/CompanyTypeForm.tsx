@@ -5,6 +5,7 @@ import { useForm } from "antd/es/form/Form";
 import FormItem from "antd/es/form/FormItem";
 import { useRouter } from "next/navigation";
 import { COMPANY_TYPES } from "../constant/CompanyConstant";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 export interface CompanyTypeForm {
   type: string;
@@ -44,8 +45,8 @@ export default function CompanyTypeForm() {
         </FormItem>
 
         <FormItem>
-          <Button htmlType="submit" type="primary">
-            Login
+          <Button htmlType="submit" type="primary" icon={<InfoCircleOutlined />}>
+            Continue
           </Button>
         </FormItem>
       </Form>
