@@ -17,8 +17,8 @@ export interface IContactInfo {
   contactNumber: string;
 }
 
-export interface IPhysicalAddress {
-  companyAddress: string;
+export interface IYardAddress {
+  yardAddress: string;
   city: string;
   province: string;
   postalCode: string;
@@ -26,7 +26,7 @@ export interface IPhysicalAddress {
 
 export interface IContact {
   contactInfo: IContactInfo[];
-  physicalAddrss: IPhysicalAddress[];
+  yardAddress: IYardAddress[];
 }
 
 
@@ -43,7 +43,7 @@ export default function Contact() {
         onFinishFailed={(errorinfo) => console.log("abc", errorinfo)}
         initialValues={{
           contactInfo: [{}],
-          physicalAddrss: [{}],
+          yardAddress: [{}]
         }}
       >
         <Divider orientation="left">Contact Info</Divider>
@@ -93,44 +93,9 @@ export default function Contact() {
 
 
         <Divider orientation="left">Physical Address</Divider>
-        <FormList name={"physicalAddress"}
 
-          rules={[
-            {
-              validator: (_, physicalAddress) => {
-                if (!physicalAddress || physicalAddress.length < 1) {
-                  return Promise.reject(new Error('At least one physical address is required.'));
-                }
-                else {
-                  return Promise.resolve();
-                }
-              }
-            }
-          ]}
-        >
-          {
-            (fields, { add, remove }) => (
-              <>
-                {
-                  fields.map(({ key, name, ...restField }) => (
-                    <Row key={key} align={"top"}>
-                      <Col span={23}>
-                        <PhysicalAddress key={key} name={name} restField={restField} /></Col>
-                      <Col span={1}>
-                        <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />
-                      </Col>
-                    </Row>
-                  ))
-                }
-                <Row>
-                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                    Add Physical Address
-                  </Button>
-                </Row>
-              </>
-            )
-          }
-        </FormList>
+        <PhysicalAddress />
+
 
         <Divider orientation="left">Mailing Address</Divider>
         <MailingAddress />
@@ -153,12 +118,12 @@ export default function Contact() {
             (fields, { add, remove }) => (
               <>
                 {
-                  fields.map(({ key, name, ...restField }) => (
+                  fields.map(({ key, name, ...restField }, index) => (
                     <Row key={key} align={"top"}>
                       <Col span={23}>
                         <YardAddress key={key} name={name} restField={restField} /></Col>
                       <Col span={1}>
-                        <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />
+                        {(index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />}
                       </Col>
                     </Row>
                   ))
@@ -180,7 +145,7 @@ export default function Contact() {
         </FormItem>
 
       </Form>
-    </FormLayout>
+    </FormLayout >
   );
 
 }

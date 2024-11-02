@@ -8,14 +8,14 @@ export default function YardAddress({ name, restField }: { name: number, restFie
       <Col md={{ span: 12 }}>
         <FormItem
           {...restField as object}
-          label="Department Name"
-          name={[name, "departmentName"]}
+          label="Yard Address"
+          name={[name, "yardAddress"]}
           rules={[{
             required: true,
           }]}
           hasFeedback
         >
-          <Input placeholder="Department Name" />
+          <Input placeholder="Yard address" />
         </FormItem>
       </Col>
 
@@ -23,42 +23,42 @@ export default function YardAddress({ name, restField }: { name: number, restFie
       <Col md={{ span: 12 }}>
         <FormItem
           {...restField as object}
-          label="Contact Person Name"
-          name={[name, "contactPersonName"]}
+          label="City"
+          name={[name, "city"]}
           rules={[{
             required: true,
           }]}
           hasFeedback
         >
-          <Input placeholder="Contact person name" />
+          <Input placeholder="City" />
         </FormItem>
       </Col>
 
       <Col md={{ span: 12 }}>
         <FormItem
           {...restField as object}
-          label="Email"
-          name={[name, "email"]}
+          label="Province"
+          name={[name, "province"]}
           rules={[{
             required: true,
           }]}
           hasFeedback
         >
-          <Input placeholder="Email" />
+          <Input placeholder="Province" />
         </FormItem>
       </Col>
 
       <Col md={{ span: 12 }}>
         <FormItem
           {...restField as object}
-          label="Contact Number"
-          name={[name, "contactNumber"]}
+          label="Postal Code"
+          name={[name, "postalCode"]}
           rules={[{
             required: true,
           }]}
           hasFeedback
         >
-          <Input placeholder="Contact Name" />
+          <Input placeholder="Postal Code" />
         </FormItem>
       </Col>
 

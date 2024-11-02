@@ -1,15 +1,14 @@
 import { Col, Input, Row } from "antd";
 import FormItem from "antd/es/form/FormItem";
 
-export default function PhysicalAddress({ name, restField }: { name: number, restField: unknown }) {
+export default function PhysicalAddress() {
   return (
     <Row gutter={15}>
 
       <Col md={{ span: 12 }}>
         <FormItem
-          {...restField as object}
           label="Company Address"
-          name={[name, "companyAddress"]}
+          name={"companyAddress"}
           rules={[{
             required: true,
           }]}
@@ -22,9 +21,8 @@ export default function PhysicalAddress({ name, restField }: { name: number, res
 
       <Col md={{ span: 12 }}>
         <FormItem
-          {...restField as object}
           label="City"
-          name={[name, "city"]}
+          name={"city"}
           rules={[{
             required: true,
           }]}
@@ -36,9 +34,8 @@ export default function PhysicalAddress({ name, restField }: { name: number, res
 
       <Col md={{ span: 12 }}>
         <FormItem
-          {...restField as object}
           label="Province"
-          name={[name, "province"]}
+          name={"province"}
           rules={[{
             required: true,
           }]}
@@ -50,9 +47,8 @@ export default function PhysicalAddress({ name, restField }: { name: number, res
 
       <Col md={{ span: 12 }}>
         <FormItem
-          {...restField as object}
           label="Postal Code"
-          name={[name, "postalCode"]}
+          name={"postalCode"}
           rules={[{
             required: true,
           }]}
