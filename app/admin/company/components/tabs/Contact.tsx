@@ -35,117 +35,115 @@ export default function Contact() {
   const [form] = useForm<IContact>();
 
   return (
-    <FormLayout>
-      <Form
-        layout="vertical"
-        form={form}
-        onFinish={(values) => console.log(values)}
-        onFinishFailed={(errorinfo) => console.log("abc", errorinfo)}
-        initialValues={{
-          contactInfo: [{}],
-          yardAddress: [{}]
-        }}
+    <Form
+      layout="vertical"
+      form={form}
+      onFinish={(values) => console.log(values)}
+      onFinishFailed={(errorinfo) => console.log("abc", errorinfo)}
+      initialValues={{
+        contactInfo: [{}],
+        yardAddress: [{}]
+      }}
+    >
+      <Divider orientation="left">Contact Info</Divider>
+      <FormList name={"contactInfo"}
+        rules={[
+          {
+            validator: (_, contactInfo) => {
+              if (!contactInfo || contactInfo.length < 1) {
+                return Promise.reject(new Error('At least one contact info is required.'));
+              }
+              else {
+                return Promise.resolve();
+              }
+            }
+          }
+        ]}
+
       >
-        <Divider orientation="left">Contact Info</Divider>
-        <FormList name={"contactInfo"}
-          rules={[
-            {
-              validator: (_, contactInfo) => {
-                if (!contactInfo || contactInfo.length < 1) {
-                  return Promise.reject(new Error('At least one contact info is required.'));
-                }
-                else {
-                  return Promise.resolve();
-                }
+        {
+          (fields, { add, remove }, { errors }) => (
+            <>
+              {
+                errors && <div style={{ color: "red" }}>{errors.toString()}</div>
+              }
+              {
+                fields.map(({ key, name, ...restField }, index) => (
+                  <Row key={key} align={"top"}>
+                    <Col span={23}>
+                      <ContactInformation key={key} fieldName={name} restField={restField} /></Col>
+                    <Col span={1}>
+                      {
+                        (index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />
+                      }
+                    </Col>
+                  </Row>
+                ))
+              }
+              <Row>
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                  Add Contact Info
+                </Button>
+              </Row>
+            </>
+          )
+        }
+      </FormList>
+
+
+      <Divider orientation="left">Physical Address</Divider>
+
+      <PhysicalAddress />
+
+
+      <Divider orientation="left">Mailing Address</Divider>
+      <MailingAddress />
+      <Divider orientation="left">Yard Address</Divider>
+      <FormList name={"yardAddress"}
+        rules={[
+          {
+            validator: (_, yardAddress) => {
+              if (!yardAddress || yardAddress.length < 1) {
+                return Promise.reject(new Error('At least one yard address is required.'));
+              }
+              else {
+                return Promise.resolve();
               }
             }
-          ]}
-
-        >
-          {
-            (fields, { add, remove }, { errors }) => (
-              <>
-                {
-                  errors && <div style={{ color: "red" }}>{errors.toString()}</div>
-                }
-                {
-                  fields.map(({ key, name, ...restField }, index) => (
-                    <Row key={key} align={"top"}>
-                      <Col span={23}>
-                        <ContactInformation key={key} fieldName={name} restField={restField} /></Col>
-                      <Col span={1}>
-                        {
-                          (index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />
-                        }
-                      </Col>
-                    </Row>
-                  ))
-                }
-                <Row>
-                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                    Add Contact Info
-                  </Button>
-                </Row>
-              </>
-            )
           }
-        </FormList>
-
-
-        <Divider orientation="left">Physical Address</Divider>
-
-        <PhysicalAddress />
-
-
-        <Divider orientation="left">Mailing Address</Divider>
-        <MailingAddress />
-        <Divider orientation="left">Yard Address</Divider>
-        <FormList name={"yardAddress"}
-          rules={[
-            {
-              validator: (_, yardAddress) => {
-                if (!yardAddress || yardAddress.length < 1) {
-                  return Promise.reject(new Error('At least one yard address is required.'));
-                }
-                else {
-                  return Promise.resolve();
-                }
+        ]}
+      >
+        {
+          (fields, { add, remove }) => (
+            <>
+              {
+                fields.map(({ key, name, ...restField }, index) => (
+                  <Row key={key} align={"top"}>
+                    <Col span={23}>
+                      <YardAddress key={key} name={name} restField={restField} /></Col>
+                    <Col span={1}>
+                      {(index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />}
+                    </Col>
+                  </Row>
+                ))
               }
-            }
-          ]}
-        >
-          {
-            (fields, { add, remove }) => (
-              <>
-                {
-                  fields.map(({ key, name, ...restField }, index) => (
-                    <Row key={key} align={"top"}>
-                      <Col span={23}>
-                        <YardAddress key={key} name={name} restField={restField} /></Col>
-                      <Col span={1}>
-                        {(index > 0) && <Button icon={<MinusOutlined />} shape="circle" danger onClick={() => remove(name)} />}
-                      </Col>
-                    </Row>
-                  ))
-                }
-                <Row>
-                  <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                    Add Yard Address
-                  </Button>
-                </Row>
-              </>
-            )
-          }
-        </FormList>
+              <Row>
+                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                  Add Yard Address
+                </Button>
+              </Row>
+            </>
+          )
+        }
+      </FormList>
 
-        <FormItem style={{ marginTop: 10 }}>
-          <Button htmlType="submit" type="primary" icon={<SaveOutlined />}>
-            Save
-          </Button>
-        </FormItem>
+      <FormItem style={{ marginTop: 10 }}>
+        <Button htmlType="submit" type="primary" icon={<SaveOutlined />}>
+          Save
+        </Button>
+      </FormItem>
 
-      </Form>
-    </FormLayout >
+    </Form>
   );
 
 }

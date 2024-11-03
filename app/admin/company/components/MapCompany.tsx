@@ -23,7 +23,6 @@ export interface IMapCompany {
 }
 
 const MapCompany: React.FC<IMapCompany> = ({ tab }) => {
-  console.log(tab);
   switch (tab) {
     case PROFILE_TAB:
       return <Profile />;
